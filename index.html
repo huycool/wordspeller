@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Word Speller</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="description" content="Helps learn spelling words" />
+    <meta name="author" content="SitePoint" />
+
+    <!-- <link rel="stylesheet" href="css/styles.css?v=1.0" /> -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
+      defer
+    ></script>
+  </head>
+  <style>
+    body {
+      background-image: linear-gradient(45deg, #2c5ad8, #c222b7, #c59a4a);
+      min-height: 100vh;
+    }
+  </style>
+
+  <body>
+    <div
+      class="container if-fluid is-hidden"
+      x-init="init()"
+      x-data="WordSpeller()"
+    >
+      <div>
+        <div class="field">
+          <label>Word #</label>
+          <div class="control">
+            <div class="select">
+              <select x-model="selectedWordIndex">
+                <template x-for="(word,index) in words" :key="index">
+                  <option
+                    :value="index"
+                    x-text="word.text"
+                    :selected="index == selectedWordIndex"
+                  ></option>
+                </template>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <button class="button is-primary" @click="sayWord()">
+              Say Word
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div x-data="WordSpeller()">
+        <div class="columns is-multiline is-mobile">
+          <template x-for="(word,index) in words" :key="index">
+            <div class="column is-half">
+              <div class="box" :class="{'has-background-primary-dark': words[index].correct == true}">
+                <div class="title" x-text="'Word #' + index"></div>
+                <button class="button is-primary mb-4" @click="sayWord(index)" :disabled="false">
+                  Say Word
+                </button>  
+                <input class="input mb-2" :id="'answer_' + index" type="text" />
+                <button class="button is-link" @click="answerWord(index)">Answer</button>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+    </div>
+
+    <!-- <script src="js/scripts.js"></script> -->
+  </body>
+</html>
+<script>
+  function speakText(text, pitch, rate, volume) {
+    // stop any speaking in progress
+    window.speechSynthesis.cancel();
+
+    // create new utterance with all the properties
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.pitch = pitch;
+    utterance.rate = rate;
+    utterance.volume = volume;
+
+    // speak that utterance
+    window.speechSynthesis.speak(utterance);
+  }
+
+  window.WordSpeller = function () {
+    return {
+      selectedWordIndex: 3,
+      words: [
+        { text: "alpha", correct: false },
+        { text: "beta" , correct: false },
+        { text: "theta" , correct: false },
+        { text: "greek" , correct: false },
+        { text: "five" , correct: false },
+        { text: "alpha" , correct: false },
+        { text: "beta" , correct: false },
+        { text: "theta" , correct: false },
+        { text: "greek" , correct: false },
+        { text: "five" , correct: false },
+        { text: "beta" , correct: false },
+        { text: "theta" , correct: false },
+        { text: "greek" , correct: false },
+        { text: "five" , correct: false },
+      ],
+      sayWord(index) {
+        speakText(this.words[index].text, 1, 1, 1);
+      },
+      answerWord(index){
+        let answer =document.getElementById("answer_" + index).value;
+        this.words[index].correct = (this.words[index].text === answer);
+      },
+      init() {
+        console.log("init()", this.words.length);
+      },
+    };
+  };
+</script>
