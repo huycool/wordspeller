@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <meta name="description" content="Helps learn spelling words" />
-    <meta name="author" content="SitePoint" />
+    <meta name="author" content="huy" />
 
     <!-- <link rel="stylesheet" href="css/styles.css?v=1.0" /> -->
     <link
@@ -44,6 +44,7 @@
                   <option
                     :value="index"
                     x-text="word.text"
+                    
                     :selected="index == selectedWordIndex"
                   ></option>
                 </template>
@@ -67,7 +68,7 @@
           <template x-for="(word,index) in words" :key="index">
             <div class="column is-half">
               <div class="box" :class="{'has-background-primary-dark': words[index].correct == true}">
-                <div class="title" x-text="'Word #' + index"></div>
+                <div class="title" x-text="'Word #' + (index+1)"></div>
                 <button class="button is-primary mb-4" @click="sayWord(index)" :disabled="false">
                   Say Word
                 </button>  
@@ -80,53 +81,6 @@
       </div>
     </div>
 
-    <!-- <script src="js/scripts.js"></script> -->
+    <script src="index.js"></script>
   </body>
 </html>
-<script>
-  function speakText(text, pitch, rate, volume) {
-    // stop any speaking in progress
-    window.speechSynthesis.cancel();
-
-    // create new utterance with all the properties
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.pitch = pitch;
-    utterance.rate = rate;
-    utterance.volume = volume;
-
-    // speak that utterance
-    window.speechSynthesis.speak(utterance);
-  }
-
-  window.WordSpeller = function () {
-    return {
-      selectedWordIndex: 3,
-      words: [
-        { text: "alpha", correct: false },
-        { text: "beta" , correct: false },
-        { text: "theta" , correct: false },
-        { text: "greek" , correct: false },
-        { text: "five" , correct: false },
-        { text: "alpha" , correct: false },
-        { text: "beta" , correct: false },
-        { text: "theta" , correct: false },
-        { text: "greek" , correct: false },
-        { text: "five" , correct: false },
-        { text: "beta" , correct: false },
-        { text: "theta" , correct: false },
-        { text: "greek" , correct: false },
-        { text: "five" , correct: false },
-      ],
-      sayWord(index) {
-        speakText(this.words[index].text, 1, 1, 1);
-      },
-      answerWord(index){
-        let answer =document.getElementById("answer_" + index).value;
-        this.words[index].correct = (this.words[index].text === answer);
-      },
-      init() {
-        console.log("init()", this.words.length);
-      },
-    };
-  };
-</script>
