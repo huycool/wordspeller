@@ -14,6 +14,9 @@
 
   <!-- <link rel="stylesheet" href="css/styles.css?v=1.0" /> -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+    crossorigin="anonymous" />
   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 </head>
 <style>
@@ -24,37 +27,22 @@
 </style>
 
 <body>
-  <div>
-    <div class="select">
-      <select id="voiceSelect"></select>
-    </div>
-  </div>
-  <div class="container if-fluid is-hidden" x-init="init()" x-data="WordSpeller()">
-    <div>
+  <div class="container" x-data="WordSpeller()">
+    <span class="icon m-5" style="color: whitesmoke;" @click="showSettings=!showSettings">
+      <i class="fas fa-2x fa-cog"></i>
+    </span>
+    <div class="box" x-show.transition="showSettings">
+      <div class="title">Settings</div>
       <div class="field">
-        <label>Word #</label>
+        <label class="label">Voice</label>
         <div class="control">
           <div class="select">
-            <select x-model="selectedWordIndex">
-              <template x-for="(word,index) in words" :key="index">
-                <option :value="index" x-text="word.text" :selected="index == selectedWordIndex"></option>
-              </template>
-            </select>
+            <select id="voiceSelect"></select>
           </div>
         </div>
       </div>
-      <div class="field">
-        <div class="control">
-          <button class="button is-primary" @click="sayWord()">
-            Say Word
-          </button>
-        </div>
-      </div>
     </div>
-  </div>
-
-  <div class="container">
-    <div x-data="WordSpeller()">
+    <div>
       <div class="columns is-multiline is-mobile">
         <template x-for="(word,index) in words" :key="index">
           <div class="column is-half">
@@ -73,6 +61,6 @@
   </div>
 
   <script src="index.js"></script>
-</body>
+</body>`
 
 </html>

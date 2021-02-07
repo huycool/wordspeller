@@ -1,30 +1,10 @@
 
-function speakText(text, pitch, rate, volume) {
-    // stop any speaking in progress
-    window.speechSynthesis.cancel();
-
-    // create new utterance with all the properties
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.pitch = pitch;
-    utterance.rate = rate;
-    utterance.volume = volume;
-
-    var selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
-    for (var i = 0; i < voices.length; i++) {
-        if (voices[i].name === selectedOption) {
-            utterance.voice = voices[i];
-        }
-    }
-
-    // speak that utterance
-    window.speechSynthesis.speak(utterance);
-}
-
 window.WordSpeller = function () {
     return {
+        showSettings: false,
         selectedWordIndex: 3,
         words: [
-            { text: "alpha", correct: false },
+            { text: "dog", correct: false },
             { text: "beta", correct: false },
             { text: "theta", correct: false },
             { text: "greek", correct: false },
@@ -51,6 +31,27 @@ window.WordSpeller = function () {
         },
     };
 };
+
+function speakText(text, pitch, rate, volume) {
+    // stop any speaking in progress
+    window.speechSynthesis.cancel();
+
+    // create new utterance with all the properties
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.pitch = pitch;
+    utterance.rate = rate;
+    utterance.volume = volume;
+
+    var selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
+    for (var i = 0; i < voices.length; i++) {
+        if (voices[i].name === selectedOption) {
+            utterance.voice = voices[i];
+        }
+    }
+
+    // speak that utterance
+    window.speechSynthesis.speak(utterance);
+}
 
 var synth = window.speechSynthesis;
 var voices = [];
