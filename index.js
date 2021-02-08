@@ -13,7 +13,7 @@ window.WordSpeller = function () {
         },
         answerWord(index) {
             let answer = document.getElementById("answer_" + index).value;
-            this.words[index].correct = (this.words[index].text === answer);
+            this.words[index].correct = (this.words[index].text.toLowerCase() === answer.toLowerCase());
         },
         init() {
             console.log("init()", this.words.length);
