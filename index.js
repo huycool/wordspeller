@@ -46,7 +46,7 @@ window.WordSpeller = function () {
     },
     pandaGifs: [],
     getPandaGifs() {
-      fetch("./panda.json")
+      fetch("panda.json")
         .then((response) => {
           return response.json();
         })
