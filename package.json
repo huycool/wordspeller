@@ -5,11 +5,16 @@
   "main": "index.js",
   "scripts": {
     "lite": "lite-server --port 10001",
-    "start": "npm run lite"
+    "start": "npm run lite",
+    "dev": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "lite-server": "^2.6.1"
+  },
+  "devDependencies": {
+    "cssnano": "^4.1.10"
   }
 }
