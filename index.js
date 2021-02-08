@@ -7,23 +7,28 @@ window.WordSpeller = function () {
       { text: "dog", correct: false },
       { text: "apple", correct: false },
     ],
-    sayWord(index, rate=1) {
+    sayWord(index, rate = 1) {
       speakText(this.words[index].text, 1, rate, 1);
     },
     answerWord(index) {
       let answer = document.getElementById("answer_" + index).value;
       this.words[index].correct =
         this.words[index].text.toLowerCase() === answer.toLowerCase();
-      let gotAllWords  = this.words.every(w => w.correct == true);
-      if(gotAllWords == true){
-        document.getElementById('greatJob').classList.add('is-active');
+      let gotAllWords = this.words.every((w) => w.correct == true);
+      if (gotAllWords == true) {
+        document.getElementById("greatJob-image").src = 
+          pandaGifs.data[Math.floor(Math.random() * 50)].images.original.url;
+        document.getElementById("greatJob").classList.add("is-active");
+        this.setWords();
       }
     },
     init() {
       console.log("init()", this.words.length);
       document.getElementById("inputWords").value = this.words
-        .map(w => w.text)
+        .map((w) => w.text)
         .join("\n");
+
+      this.getPandaGifs();
     },
     setWords() {
       let words = document
@@ -31,13 +36,24 @@ window.WordSpeller = function () {
         .value.trim()
         .split("\n");
       console.log(words);
-      this.words = words.map(w => {
+      this.words = words.map((w) => {
         return { text: w, correct: false };
       });
       let answerInputs = document.querySelectorAll("[id^='answer_']");
-      for (const i of answerInputs) {         
+      for (const i of answerInputs) {
         i.value = "";
-      };
+      }
+    },
+    pandaGifs: [],
+    getPandaGifs() {
+      fetch("./panda.json")
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+          pandaGifs = data;
+        });
     },
   };
 };
