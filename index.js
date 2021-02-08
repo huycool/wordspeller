@@ -3,9 +3,9 @@ window.WordSpeller = function () {
     showSettings: false,
     selectedWordIndex: 3,
     words: [
+      { text: "cat", correct: false },
       { text: "dog", correct: false },
-      { text: "beta", correct: false },
-      { text: "theta", correct: false },
+      { text: "apple", correct: false },
     ],
     sayWord(index, rate=1) {
       speakText(this.words[index].text, 1, rate, 1);
@@ -14,6 +14,10 @@ window.WordSpeller = function () {
       let answer = document.getElementById("answer_" + index).value;
       this.words[index].correct =
         this.words[index].text.toLowerCase() === answer.toLowerCase();
+      let gotAllWords  = this.words.every(w => w.correct == true);
+      if(gotAllWords == true){
+        document.getElementById('greatJob').classList.add('is-active');
+      }
     },
     init() {
       console.log("init()", this.words.length);
