@@ -7,7 +7,7 @@
     "lite": "lite-server --port 10001",
     "start": "npm run lite",
     "dev": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html --out-dir docs"
   },
   "author": "",
   "license": "ISC",
