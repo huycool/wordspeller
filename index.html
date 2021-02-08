@@ -131,7 +131,16 @@
       ></button>
     </div>
 
-    <script src="index-min.js"></script>
+    <!-- <script src="index-min.js"></script> -->
+
+    <script src id="indexjs"></script>
+    <script type="text/javascript">
+      // change path to match your file:
+      let resourcePath = "index-min.js";
+
+      document.getElementById("indexjs").src =
+        resourcePath + "?v=" + Date.now();
+    </script>
   </body>
   `
 </html>
