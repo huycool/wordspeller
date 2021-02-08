@@ -31,7 +31,7 @@ window.WordSpeller = function () {
         return { text: w, correct: false };
       });
       let answerInputs = document.querySelectorAll("[id^='answer_']");
-      for (const i of answerInputs) {
+      for (const i of answerInputs) {         
         i.value = "";
       };
     },
