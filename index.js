@@ -7,17 +7,6 @@ window.WordSpeller = function () {
             { text: "dog", correct: false },
             { text: "beta", correct: false },
             { text: "theta", correct: false },
-            { text: "greek", correct: false },
-            { text: "five", correct: false },
-            { text: "alpha", correct: false },
-            { text: "beta", correct: false },
-            { text: "theta", correct: false },
-            { text: "greek", correct: false },
-            { text: "five", correct: false },
-            { text: "beta", correct: false },
-            { text: "theta", correct: false },
-            { text: "greek", correct: false },
-            { text: "five", correct: false },
         ],
         sayWord(index) {
             speakText(this.words[index].text, 1, 1, 1);
@@ -28,7 +17,17 @@ window.WordSpeller = function () {
         },
         init() {
             console.log("init()", this.words.length);
+            document.getElementById("inputWords").value =
+                this.words.map(w => w.text).join("\n");
         },
+        setWords() {
+            let words = document.getElementById("inputWords")
+                .value.trim().split("\n");
+            console.log(words);
+            this.words = words.map(w => {
+                return { text: w, correct: false };
+            })
+        }
     };
 };
 
