@@ -80,8 +80,15 @@
                   @click="sayWord(index)"
                   :disabled="false"
                 >
-                  Say Word
+                  Say
                 </button>
+                <button
+                  class="button is-primary mb-4"
+                  @click="sayWord(index,.25)"
+                  :disabled="false"
+                >
+                  Slowly
+                </button>                
                 <input class="input mb-2 is-size-5 has-text-weight-bold" :id="'answer_' + index" type="text" />
                 <button class="button is-link" @click="answerWord(index)">
                   Answer

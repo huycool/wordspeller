@@ -7,8 +7,8 @@ window.WordSpeller = function () {
       { text: "beta", correct: false },
       { text: "theta", correct: false },
     ],
-    sayWord(index) {
-      speakText(this.words[index].text, 1, 1, 1);
+    sayWord(index, rate=1) {
+      speakText(this.words[index].text, 1, rate, 1);
     },
     answerWord(index) {
       let answer = document.getElementById("answer_" + index).value;
