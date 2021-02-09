@@ -89,7 +89,7 @@
       <div class="m-2">
         <div class="columns is-multiline is-mobile">
           <template x-for="(word,index) in words" :key="index">
-            <div class="column is-half">
+            <div class="column is-full">
               <div
                 class="box"
                 :class="{'has-background-primary-dark': words[index].correct == true}"
@@ -100,14 +100,14 @@
                   @click="sayWord(index)"
                   :disabled="false"
                 >
-                  Say
+                <i class="fas fa-play"></i>
                 </button>
                 <button
                   class="button is-primary mb-4"
                   @click="sayWord(index,.25)"
                   :disabled="false"
                 >
-                  Slowly
+                <i class="fas fa-play"> slow</i>
                 </button>
                 <input
                   class="input mb-2 is-size-5 has-text-weight-bold"
