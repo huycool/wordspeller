@@ -20,6 +20,8 @@ window.WordSpeller = function () {
           pandaGifs.data[Math.floor(Math.random() * 50)].images.original.url;
         document.getElementById("greatJob").classList.add("is-active");
         this.setWords();
+      }else{
+        playWrongAnswer(index);
       }
     },
     init() {
@@ -60,6 +62,16 @@ window.WordSpeller = function () {
     },
   };
 };
+
+// ref: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Tips#javascript_content
+function playWrongAnswer(index) {
+  document.getElementById("wordbox_" + index).className = "box";
+  window.requestAnimationFrame(function(time) {
+    window.requestAnimationFrame(function(time) {
+      document.getElementById("wordbox_" + index).className = "box animate-wrong";
+    });
+  });
+}
 
 function speakText(text, pitch, rate, volume) {
   // stop any speaking in progress

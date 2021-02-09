@@ -39,13 +39,25 @@
       background-image: linear-gradient(45deg, #2c5ad8, #c222b7, #c59a4a);
       min-height: 100vh;
     }
+
+    .animate-wrong {      
+      animation: animationFrames 2s;    
+    }
+
+    @keyframes animationFrames {
+      50% {
+        background-color: red;
+      }
+    }
   </style>
 
   <body>
     <div class="container" x-data="WordSpeller()" x-init="init()">
       <section class="hero is-small is-primary">
         <div class="hero-body">
-          <p class="title" style="font-family: Poppins, sans-serif">Word Flash</p>
+          <p class="title" style="font-family: Poppins, sans-serif">
+            Word Flash
+          </p>
           <p class="subtitle">spelling flash cards</p>
         </div>
       </section>
@@ -57,12 +69,12 @@
         <i class="fas fa-2x fa-cog"></i>
       </div>
       <span
-      class="m-4"
+        class="m-4"
         style="color: whitesmoke"
         x-show="words.length == 0"
         @click="showSettings=true"
-        >Click settings (gear) to add some words. </span
-      >
+        >Click settings (gear) to add some words.
+      </span>
       <div class="box m-2" x-show.transition="showSettings">
         <!-- <div class="title">Settings</div> -->
         <div class="field">
@@ -91,6 +103,7 @@
           <template x-for="(word,index) in words" :key="index">
             <div class="column is-full">
               <div
+                :id="'wordbox_' + index"
                 class="box"
                 :class="{'has-background-primary-dark': words[index].correct == true}"
               >
@@ -100,14 +113,14 @@
                   @click="sayWord(index)"
                   :disabled="false"
                 >
-                <i class="fas fa-play"></i>
+                  <i class="fas fa-play"></i>
                 </button>
                 <button
                   class="button is-primary mb-4"
                   @click="sayWord(index,.25)"
                   :disabled="false"
                 >
-                <i class="fas fa-play"> slow</i>
+                  <i class="fas fa-play"> slow</i>
                 </button>
                 <input
                   class="input mb-2 is-size-5 has-text-weight-bold"
