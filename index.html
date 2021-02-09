@@ -24,6 +24,11 @@
       integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
       crossorigin="anonymous"
     />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap"
+      rel="stylesheet"
+    />
     <script
       src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
       defer
@@ -38,21 +43,28 @@
 
   <body>
     <div class="container" x-data="WordSpeller()" x-init="init()">
-      <span
+      <section class="hero is-small is-primary">
+        <div class="hero-body">
+          <p class="title" style="font-family: Poppins, sans-serif">Word Flash</p>
+          <p class="subtitle">spelling flash cards</p>
+        </div>
+      </section>
+      <div
         class="icon m-5"
-        style="color: whitesmoke"
+        style="color: whitesmoke; position: absolute; top: 0%; right: 0%"
         @click="showSettings=!showSettings"
       >
         <i class="fas fa-2x fa-cog"></i>
-      </span>
+      </div>
       <span
+      class="m-4"
         style="color: whitesmoke"
         x-show="words.length == 0"
         @click="showSettings=true"
-        >Click here to add words</span
+        >Click settings (gear) to add some words. </span
       >
-      <div class="box" x-show.transition="showSettings">
-        <div class="title">Settings</div>
+      <div class="box m-2" x-show.transition="showSettings">
+        <!-- <div class="title">Settings</div> -->
         <div class="field">
           <label class="label">Voice</label>
           <div class="control">
@@ -63,7 +75,7 @@
         </div>
         <div class="field">
           <label class="label">List of Words</label>
-          <button class="button is-link" @click="setWords()">Apply</button>
+          <button class="button is-link mb-2" @click="setWords()">Apply</button>
           <div class="control">
             <textarea
               class="textarea is-size-5 has-text-weight-bold"
@@ -74,7 +86,7 @@
           </div>
         </div>
       </div>
-      <div>
+      <div class="m-2">
         <div class="columns is-multiline is-mobile">
           <template x-for="(word,index) in words" :key="index">
             <div class="column is-half">
