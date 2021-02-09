@@ -94,9 +94,15 @@ function populateVoiceList() {
   var selectedIndex =
     voiceSelect.selectedIndex < 0 ? 0 : voiceSelect.selectedIndex;
   voiceSelect.innerHTML = "";
+
+  let findEnglishIdx = 0;
   for (i = 0; i < voices.length; i++) {
     var option = document.createElement("option");
     option.textContent = voices[i].name + " (" + voices[i].lang + ")";
+
+    if(option.textContent.indexOf("en-US") > -1){
+      findEnglishIdx = i;
+    }
 
     if (voices[i].default) {
       option.textContent += " -- DEFAULT";
@@ -106,7 +112,7 @@ function populateVoiceList() {
     option.setAttribute("data-name", voices[i].name);
     voiceSelect.appendChild(option);
   }
-  voiceSelect.selectedIndex = selectedIndex;
+  voiceSelect.selectedIndex = findEnglishIdx;
 }
 
 populateVoiceList();
