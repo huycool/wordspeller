@@ -1,0 +1,39 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Copy json files",
+			"type": "shell",
+			"command": "copy-item json_gifs\\*.* .\\docs",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"Create docs folder",
+				"Clear docs folder",
+				"Parcel build"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Parcel build",
+			"type": "shell",
+			"command": "parcel build index.html --out-dir ./docs --public-url ./",
+			"group": "build"
+		},
+		{
+			"label": "Clear docs folder",
+			"type": "shell",
+			"command": "Get-ChildItem -Path docs -File | Remove-Item",
+			"group": "build"
+		},
+		{
+			"label": "Create docs folder",
+			"type": "shell",
+			"command": "New-Item -ItemType Directory -Force -Path 'docs'",
+			"group": "build"
+		}
+	]
+}
