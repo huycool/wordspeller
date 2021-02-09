@@ -16,5 +16,8 @@
   },
   "devDependencies": {
     "cssnano": "^4.1.10"
+  },
+  "comments": {
+    "build": "for Github pages need to output to docs folder; the public-url makes sures the script src works in subdirectory (no forward slash)"
   }
 }

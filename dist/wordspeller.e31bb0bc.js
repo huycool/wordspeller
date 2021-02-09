@@ -128,16 +128,10 @@ window.WordSpeller = function () {
   return {
     showSettings: false,
     selectedWordIndex: 3,
-    words: [{
-      text: "cat",
-      correct: false
-    }, {
-      text: "dog",
-      correct: false
-    }, {
-      text: "apple",
-      correct: false
-    }],
+    words: [// { text: "cat", correct: false },
+      // { text: "dog", correct: false },
+      // { text: "apple", correct: false },
+    ],
     sayWord: function sayWord(index) {
       var rate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
       speakText(this.words[index].text, 1, rate, 1);
@@ -163,14 +157,19 @@ window.WordSpeller = function () {
       this.getPandaGifs();
     },
     setWords: function setWords() {
+      this.words = [];
       var words = document.getElementById("inputWords").value.trim().split("\n");
       console.log(words);
-      this.words = words.map(function (w) {
-        return {
-          text: w,
-          correct: false
-        };
-      });
+
+      if (words.length > 0 && words[0] != "") {
+        this.words = words.map(function (w) {
+          return {
+            text: w,
+            correct: false
+          };
+        });
+      }
+
       var answerInputs = document.querySelectorAll("[id^='answer_']");
 
       var _iterator = _createForOfIteratorHelper(answerInputs),
@@ -288,7 +287,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51179" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53069" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

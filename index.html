@@ -45,6 +45,12 @@
       >
         <i class="fas fa-2x fa-cog"></i>
       </span>
+      <span
+        style="color: whitesmoke"
+        x-show="words.length == 0"
+        @click="showSettings=true"
+        >Click here to add words</span
+      >
       <div class="box" x-show.transition="showSettings">
         <div class="title">Settings</div>
         <div class="field">

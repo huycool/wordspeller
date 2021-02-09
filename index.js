@@ -3,9 +3,9 @@ window.WordSpeller = function () {
     showSettings: false,
     selectedWordIndex: 3,
     words: [
-      { text: "cat", correct: false },
-      { text: "dog", correct: false },
-      { text: "apple", correct: false },
+      // { text: "cat", correct: false },
+      // { text: "dog", correct: false },
+      // { text: "apple", correct: false },
     ],
     sayWord(index, rate = 1) {
       speakText(this.words[index].text, 1, rate, 1);
@@ -16,7 +16,7 @@ window.WordSpeller = function () {
         this.words[index].text.toLowerCase() === answer.toLowerCase();
       let gotAllWords = this.words.every((w) => w.correct == true);
       if (gotAllWords == true) {
-        document.getElementById("greatJob-image").src = 
+        document.getElementById("greatJob-image").src =
           pandaGifs.data[Math.floor(Math.random() * 50)].images.original.url;
         document.getElementById("greatJob").classList.add("is-active");
         this.setWords();
@@ -31,14 +31,17 @@ window.WordSpeller = function () {
       this.getPandaGifs();
     },
     setWords() {
+      this.words = [];
       let words = document
         .getElementById("inputWords")
         .value.trim()
         .split("\n");
       console.log(words);
-      this.words = words.map((w) => {
-        return { text: w, correct: false };
-      });
+      if (words.length > 0 && words[0] != "") {
+        this.words = words.map((w) => {
+          return { text: w, correct: false };
+        });
+      }
       let answerInputs = document.querySelectorAll("[id^='answer_']");
       for (const i of answerInputs) {
         i.value = "";
@@ -100,7 +103,7 @@ function populateVoiceList() {
     var option = document.createElement("option");
     option.textContent = voices[i].name + " (" + voices[i].lang + ")";
 
-    if(option.textContent.indexOf("en-US") > -1){
+    if (option.textContent.indexOf("en-US") > -1) {
       findEnglishIdx = i;
     }
 
