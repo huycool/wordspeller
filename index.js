@@ -103,7 +103,7 @@ function populateVoiceList() {
     var option = document.createElement("option");
     option.textContent = voices[i].name + " (" + voices[i].lang + ")";
 
-    if (option.textContent.indexOf("en-US") > -1) {
+    if (option.textContent.indexOf("en-US") > -1 || option.textContent.indexOf("en_US") > -1) {
       findEnglishIdx = i;
     }
 
