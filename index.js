@@ -14,14 +14,16 @@ window.WordSpeller = function () {
       let answer = document.getElementById("answer_" + index).value;
       this.words[index].correct =
         this.words[index].text.toLowerCase() === answer.toLowerCase();
+      if(this.words[index].correct == false){
+        playWrongAnswer(index);
+      }
+        
       let gotAllWords = this.words.every((w) => w.correct == true);
       if (gotAllWords == true) {
         document.getElementById("greatJob-image").src =
           pandaGifs.data[Math.floor(Math.random() * 50)].images.original.url;
         document.getElementById("greatJob").classList.add("is-active");
         this.setWords();
-      }else{
-        playWrongAnswer(index);
       }
     },
     init() {
@@ -66,9 +68,10 @@ window.WordSpeller = function () {
 // ref: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Tips#javascript_content
 function playWrongAnswer(index) {
   document.getElementById("wordbox_" + index).className = "box";
-  window.requestAnimationFrame(function(time) {
-    window.requestAnimationFrame(function(time) {
-      document.getElementById("wordbox_" + index).className = "box animate-wrong";
+  window.requestAnimationFrame(function (time) {
+    window.requestAnimationFrame(function (time) {
+      document.getElementById("wordbox_" + index).className =
+        "box animate-wrong";
     });
   });
 }
@@ -115,7 +118,10 @@ function populateVoiceList() {
     var option = document.createElement("option");
     option.textContent = voices[i].name + " (" + voices[i].lang + ")";
 
-    if (option.textContent.indexOf("en-US") > -1 || option.textContent.indexOf("en_US") > -1) {
+    if (
+      option.textContent.indexOf("en-US") > -1 ||
+      option.textContent.indexOf("en_US") > -1
+    ) {
       findEnglishIdx = i;
     }
 
