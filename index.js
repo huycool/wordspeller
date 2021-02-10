@@ -2,11 +2,7 @@ window.WordSpeller = function () {
   return {
     showSettings: false,
     selectedWordIndex: 3,
-    words: [
-      // { text: "cat", correct: false },
-      // { text: "dog", correct: false },
-      // { text: "apple", correct: false },
-    ],
+    words: [],
     sayWord(index, rate = 1) {
       speakText(this.words[index].text, 1, rate, 1);
     },

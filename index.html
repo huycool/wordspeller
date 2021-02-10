@@ -101,7 +101,7 @@
       <div class="m-2">
         <div class="columns is-multiline is-mobile">
           <template x-for="(word,index) in words" :key="index">
-            <div class="column is-full">
+            <div class="column is-full" @click="showSettings=false">
               <div
                 :id="'wordbox_' + index"
                 class="box"
