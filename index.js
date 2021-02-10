@@ -2,6 +2,7 @@ window.WordSpeller = function () {
   return {
     showSettings: false,
     selectedWordIndex: 3,
+    inputWords: "",
     words: [],
     sayWord(index, rate = 1) {
       speakText(this.words[index].text, 1, rate, 1);
@@ -10,10 +11,10 @@ window.WordSpeller = function () {
       let answer = document.getElementById("answer_" + index).value;
       this.words[index].correct =
         this.words[index].text.toLowerCase() === answer.toLowerCase();
-      if(this.words[index].correct == false){
+      if (this.words[index].correct == false) {
         playWrongAnswer(index);
       }
-        
+
       let gotAllWords = this.words.every((w) => w.correct == true);
       if (gotAllWords == true) {
         document.getElementById("greatJob-image").src =
@@ -22,20 +23,12 @@ window.WordSpeller = function () {
         this.setWords();
       }
     },
-    init() {
-      console.log("init()", this.words.length);
-      document.getElementById("inputWords").value = this.words
-        .map((w) => w.text)
-        .join("\n");
-
+    init() {      
       this.getPandaGifs();
     },
     setWords() {
       this.words = [];
-      let words = document
-        .getElementById("inputWords")
-        .value.trim()
-        .split("\n");
+      let words = this.inputWords.trim().split("\n");
       console.log(words);
       if (words.length > 0 && words[0] != "") {
         this.words = words.map((w) => {
@@ -46,6 +39,16 @@ window.WordSpeller = function () {
       for (const i of answerInputs) {
         i.value = "";
       }
+    },
+    saveWords() {
+      this.words=[];
+      let words = this.inputWords.trim().split("\n");
+      localStorage.setItem("words", JSON.stringify(words));
+    },
+    loadWords() {
+      this.words=[];
+      let words = JSON.parse(localStorage.getItem("words"));
+      this.inputWords = words.join("\n");
     },
     pandaGifs: [],
     getPandaGifs() {

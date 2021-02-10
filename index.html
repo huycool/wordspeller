@@ -87,11 +87,23 @@
         </div>
         <div class="field">
           <label class="label">List of Words</label>
-          <button class="button is-link mb-2" @click="setWords()">Apply</button>
+          <button class="button is-link mb-2" @click="setWords(); showSettings=false">
+            Practice
+          </button>
+          <button
+            class="button is-link mb-2"
+            @click="saveWords()"
+            :disabled="inputWords.length==0"
+          >
+            Save
+          </button>
+          <button class="button is-link mb-2" @click="loadWords()">
+            Load Last
+          </button>
           <div class="control">
             <textarea
+              x-model="inputWords"
               class="textarea is-size-5 has-text-weight-bold"
-              id="inputWords"
               placeholder="one word per line"
               rows="10"
             ></textarea>
@@ -111,14 +123,12 @@
                 <button
                   class="button is-primary mb-4"
                   @click="sayWord(index)"
-                  :disabled="false"
                 >
                   <i class="fas fa-play"></i>
                 </button>
                 <button
                   class="button is-primary mb-4"
                   @click="sayWord(index,.25)"
-                  :disabled="false"
                 >
                   <i class="fas fa-play"> slow</i>
                 </button>
