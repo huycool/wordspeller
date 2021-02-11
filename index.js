@@ -18,13 +18,13 @@ window.WordSpeller = function () {
       let gotAllWords = this.words.every((w) => w.correct == true);
       if (gotAllWords == true) {
         document.getElementById("greatJob-image").src =
-          pandaGifs.data[Math.floor(Math.random() * 50)].images.original.url;
+          this.winningGifs.data[Math.floor(Math.random() * 25)].images.original.url;
         document.getElementById("greatJob").classList.add("is-active");
         this.setWords();
       }
     },
     init() {      
-      this.getPandaGifs();
+      this.getWinningGifs();
     },
     setWords() {
       this.words = [];
@@ -50,15 +50,17 @@ window.WordSpeller = function () {
       let words = JSON.parse(localStorage.getItem("words"));
       this.inputWords = words.join("\n");
     },
-    pandaGifs: [],
-    getPandaGifs() {
-      fetch("panda.json")
+    selectedWinGif: "panda",
+    winGifOptions : ["panda","fortnite","funnycats"],
+    winningGifs: [],
+    getWinningGifs() {
+      fetch(this.selectedWinGif + ".json")
         .then((response) => {
           return response.json();
         })
         .then((data) => {
           console.log(data);
-          pandaGifs = data;
+          this.winningGifs = data;
         });
     },
   };
