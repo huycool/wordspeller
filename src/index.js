@@ -23,7 +23,8 @@ window.WordSpeller = function () {
         this.setWords();
       }
     },
-    init() {      
+    init() {            
+      this.selectedWinGif = this.winGifOptions[Math.floor(Math.random() * this.winGifOptions.length)];
       this.getWinningGifs();
     },
     setWords() {
@@ -50,7 +51,7 @@ window.WordSpeller = function () {
       let words = JSON.parse(localStorage.getItem("words"));
       this.inputWords = words.join("\n");
     },
-    selectedWinGif: "panda",
+    selectedWinGif: "",
     winGifOptions : ["panda","fortnite","funnycats"],
     winningGifs: [],
     getWinningGifs() {

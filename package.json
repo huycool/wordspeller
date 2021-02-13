@@ -4,11 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npm-run-all --sequential mkdir-dist copy-json parcel-dev",
-    "parcel-dev": "parcel index.html",
-    "copy-json": "copy json_gifs\\*.* .\\dist",
-    "mkdir-dist": "IF NOT EXIST dist mkdir dist",
-    "build": "parcel build index.html --out-dir ./docs --public-url ./"
+    "dev": "parcel ./src/index.html",
+    "build": "parcel build .src/index.html --out-dir ./docs --public-url ./"
   },
   "author": "",
   "license": "ISC",
