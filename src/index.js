@@ -43,7 +43,7 @@ window.WordSpeller = function () {
     },
     saveWords() {
       this.words=[];
-      let words = this.inputWords.trim().split("\n");
+       let words = this.inputWords.split("\n");
       localStorage.setItem("words", JSON.stringify(words));
     },
     loadWords() {

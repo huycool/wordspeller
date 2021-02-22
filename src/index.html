@@ -98,16 +98,19 @@
               </select>
             </div>
           </div>
-        </div>        
+        </div>
         <div class="field">
           <label class="label">List of Words</label>
-          <button class="button is-link mb-2" @click="setWords(); showSettings=false">
+          <button
+            class="button is-link mb-2"
+            @click="setWords(); showSettings=false"
+          >
             Practice
           </button>
           <button
             class="button is-link mb-2"
             @click="saveWords()"
-            :disabled="inputWords.length==0"
+            :disabled="inputWords.length==0"            
           >
             Save
           </button>
@@ -117,9 +120,11 @@
           <div class="control">
             <textarea
               x-model="inputWords"
+              id="inputWords"
               class="textarea is-size-5 has-text-weight-bold"
               placeholder="one word per line"
               rows="10"
+              @blur="inputWords=inputWords.trim().toLowerCase()"
             ></textarea>
           </div>
         </div>
@@ -134,10 +139,7 @@
                 :class="{'has-background-primary-dark': words[index].correct == true}"
               >
                 <div class="title" x-text="'Word #' + (index+1)"></div>
-                <button
-                  class="button is-primary mb-4"
-                  @click="sayWord(index)"
-                >
+                <button class="button is-primary mb-4" @click="sayWord(index)">
                   <i class="fas fa-play"></i>
                 </button>
                 <button
